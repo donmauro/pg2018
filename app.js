@@ -5,6 +5,11 @@ const mountRoutes = require('./routes')
 const app = express()
 mountRoutes(app)
 
-app.listen(3000, function () {
+let port = process.env.PORT; //HEROKU PORT
+if (port == null || port == "") {
+  port = 3000;
+}
+
+app.listen(port, function () {
   console.log('Example app listening on port 3000!');
 })

@@ -1,5 +1,4 @@
 const Router = require('express-promise-router')
-
 const db = require('../db')
 
 // create a new express-promise-router
@@ -11,14 +10,15 @@ const router = new Router()
 module.exports = router
 
 router.get('/', async (req, res) => {
+  console.log('CITTA')
   const { id } = req.params
-  const { rows } = await db.query('SELECT * FROM public.user')
-  res.send(rows[0])
+  const { rows } = await db.query('SELECT * FROM public.citta')
+  res.send(rows)
 })
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params
-    const { rows } = await db.query('SELECT * FROM public.user WHERE nome = $1', [id])
+    const { rows } = await db.query('SELECT * FROM public.citta WHERE descrizione = $1', [id])
 
     db.clients
     res.send(rows[0])
