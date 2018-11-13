@@ -13,11 +13,13 @@ module.exports = {
       client.query(text, params, (err, res) => {
         if (err) throw err;
 
-        for (let row of res.rows) {
+        /*for (let row of res.rows) {
           console.log(JSON.stringify(row));
-        }
+        }*/
         console.log(res.rows)
         client.end();
+        return res.rows
+        
       });
   }
 }
