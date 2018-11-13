@@ -13,7 +13,7 @@ module.exports = router
 router.get('/', async (req, res) => {
   const { id } = req.params
   const { rows } = await db.query('SELECT * FROM public.users')
-  res.send(rows[0])
+  res.send(rows)
 })
 
 router.get('/:id', async (req, res) => {
