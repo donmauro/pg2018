@@ -17,7 +17,6 @@ module.exports = {
           console.log(JSON.stringify(row));
         }*/
         console.log(res.rows)
-        client.end();
         return res.rows
         
       });
