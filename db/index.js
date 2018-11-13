@@ -1,32 +1,24 @@
-const { Pool } = require('pg')
+const { Client } = require('pg');
 
-const pool = new Pool({
-    host: 'localhost',
-    port: 5433,
-    database: 'postgres',
-    user: 'postgres',
-    password: 'postgres',
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-  })
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
 
-  /*const pool = new Pool({
-    host: 'ec2-54-247-111-19.eu-west-1.compute.amazonaws.com',
-    port: 5432,
-    database: 'd9ca76hljd7aa2',
-    user: 'ipwcbowgiosjmj',
-    password: '2b1630ee4221dafc2f07db26425e08a1baeff16b7a42b3d153013d783031f4af',
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-    ssl: true,
-  })*/
+await client.connect();
+
+/*client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});*/
 
 module.exports = {
-  query: (text, params) => {
-    console.log("clients:" + pool.totalCount)
-    return pool.query(text, params)
-
+    query: (text, params) => {
+      console.log("clients:" + pool.totalCount)
+      return await client.query(text, params)
+  
+    }
   }
-}
