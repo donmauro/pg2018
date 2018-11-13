@@ -16,7 +16,7 @@ module.exports = {
         for (let row of res.rows) {
           console.log(JSON.stringify(row));
         }
-        return JSON.stringify(res.rows)
+        console.log(res.rows)
         client.end();
       });
   }
