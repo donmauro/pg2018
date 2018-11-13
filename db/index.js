@@ -8,17 +8,8 @@ const client = new Client({
 client.connect();
 
 module.exports = {
-    query: (text, params) => {
-      console.log("clients:")
-      client.query(text, params, (err, res) => {
-        if (err) throw err;
-
-        /*for (let row of res.rows) {
-          console.log(JSON.stringify(row));
-        }*/
-        console.log(res.rows)
-        return res.rows
-        
-      });
+  query: (text, params) => {
+    console.log("clients:")
+    return client.query(text, params)
   }
 }
