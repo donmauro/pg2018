@@ -5,20 +5,19 @@ const client = new Client({
   ssl: true,
 });
 
-await client.connect();
-
-/*client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});*/
+client.connect();
 
 module.exports = {
     query: (text, params) => {
-      console.log("clients:" + pool.totalCount)
-      return await client.query(text, params)
-  
-    }
+      console.log("clients:")
+      client.query(text, params, (err, res) => {
+        if (err) throw err;
+
+        for (let row of res.rows) {
+          console.log(JSON.stringify(row));
+        }
+        return res.rows
+        client.end();
+      });
   }
+}
